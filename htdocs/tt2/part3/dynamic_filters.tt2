@@ -1,0 +1,3 @@
+[% SET dist = 17 %]
+[% dist %] miles is [% dist | units( "mi", "km" ) | format "%0.2f" %] km
+or [% dist | units( "mi", "mm" ) | format "%d" %] mm

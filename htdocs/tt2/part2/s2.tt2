@@ -1,0 +1,11 @@
+<! [% component.name %] -->
+
+[%# Header and footer have been moved to a wrapper %]
+
+<table>
+<tr><th>Something</th><th>Something Else</th></tr>
+[% FOREACH r IN rows %]
+<tr><td>[% r.something %]</td><td>[% r.something_else %]</td></tr>
+[% END %]
+</table>
+<!-- End [% component.name %] -->

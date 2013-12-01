@@ -1,0 +1,36 @@
+[%- MACRO hello BLOCK; 'Hello from a simple macro.'; END; -%]
+
+[%- MACRO hello_name(name) BLOCK; 'Hello '; name;  ' from a simple macro.'; END; -%]
+
+[%-
+# DateTime macros. The Template::Plugin::DateTime module must be installed. 
+# dt_dd_mon_yyyy eg 1 Feb 2013
+# dt_dd_mm_yyyy eg 1/7/2013
+-%]
+
+[%- MACRO dt_dd_mon_yyyy(dt,sep) 
+BLOCK;
+IF ! sep;
+SET sep='/';
+END;
+GET dt.day;
+GET sep;
+GET dt.month_abbr;
+GET sep;
+GET dt.year;
+END -%]
+
+[%- MACRO dt_dd_mm_yyyy(dt,sep) 
+BLOCK;
+IF ! sep;
+SET sep='/';
+END;
+dt.day;
+sep;
+dt.month;
+sep;
+dt.year;
+END -%]
+
+[%- %][%# Macros can be nested, but the documentation is unclear about whether a macro can return, or otherwise set, a variable
+in the calling macro. I couldn't make it work. -%]

@@ -1,0 +1,22 @@
+[%# This template is using macro definitions which were loaded using the PRE_PROCESS directive. 
+"format" and "ord" are both static filters. The former comes as standard. The latter is a custom filter.
+-%]
+
+[%- USE date = DateTime( today = 1 ) -%]
+
+[%- dt_dd_mon_yyyy( date ) %]
+[% dt_dd_mon_yyyy( date, '-' ) %]
+[% dt_dd_mon_yyyy( date.add(days=1) ) %]
+
+[% dt_dd_mm_yyyy( date ) %]
+[% dt_dd_mm_yyyy( date, '-' ) %]
+[% dt_dd_mm_yyyy( date.add(days=1) ) %]
+
+[%- USE new_year = DateTime( day = 1, month = 1, year = date.year + 1) -%]
+
+We can format the numbers: [% new_year.day | format('%02d') %] [% new_year.month | format( '%02d' )  %] [% new_year.year %].
+
+The ordinate of 7 is [% 7 | ord %].
+
+Lets all have a party on [% new_year.day_name %] [% new_year.day | ord %] [% new_year.month_name %] [% new_year.year %]
+

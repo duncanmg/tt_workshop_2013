@@ -1,0 +1,20 @@
+[%# This template is using macro definitions which were loaded using the PRE_PROCESS directive. -%]
+
+[% hello %]
+
+[% hello_name('LPW') %]
+
+[% USE date = DateTime( today = 1 ) -%]
+
+[%- dt_dd_mon_yyyy( date ) %]
+[% dt_dd_mon_yyyy( date, '-' ) %]
+[% dt_dd_mon_yyyy( date.add(days=1) ) %]
+
+[% dt_dd_mm_yyyy( date ) %]
+[% dt_dd_mm_yyyy( date, '-' ) %]
+[% dt_dd_mm_yyyy( date.add(days=1) ) %]
+
+[%- USE new_year = DateTime( day = 1, month = 1, year = date.year + 1) -%]
+
+Lets all have a party on [% dt_dd_mon_yyyy(new_year) %].
+

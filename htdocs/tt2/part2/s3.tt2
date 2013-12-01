@@ -1,0 +1,11 @@
+<! [% component.name %] -->
+
+[%# Using a filter to encode entities and control case. %]
+
+<table>
+<tr><th>Something</th><th>Something Else</th></tr>
+[% FOREACH r IN rows %]
+<tr><td>[% r.something FILTER html_entity %]</td><td>[% r.something_else FILTER upper FILTER html_entity %]</td></tr>
+[% END %]
+</table>
+<!-- End [% component.name %] -->

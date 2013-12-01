@@ -1,0 +1,19 @@
+[%# Using a plugin to format currency %]
+
+<! [% component.name %] -->
+
+[% USE money=format('%.2f') -%]
+
+<select>
+[% FOREACH s IN suppliers.sort %]
+<option value="s"/>[% s %]
+[% END %]
+</select>
+
+<table>
+<tr><th>No</th><th>Something</th><th>Something Else</th><th>Cost</ht></tr>
+[% FOREACH r IN rows %]
+<tr><td> ([% loop.index %])</td><td>[% r.something FILTER html_entity %]</td><td>[% r.something_else FILTER html_entity FILTER upper %]</td><td>&pound;[% money(r.cost) %]</td></tr>
+[% END %]
+</table>
+<!-- End [% component.name %] -->

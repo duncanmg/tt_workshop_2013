@@ -1,0 +1,42 @@
+[%# DateTime macros. The Template::Plugin::DateTime module must be installed. -%]
+
+[%- USE date = DateTime( today = 1 ) -%]
+[%- MACRO dt_dd_mon_yyyy(dt,sep) 
+BLOCK;
+IF ! sep;
+SET sep='/';
+END;
+GET dt.day;
+GET sep;
+GET dt.month_abbr;
+GET sep;
+GET dt.year;
+END -%]
+
+[%- dt_dd_mon_yyyy( date ) %]
+[% dt_dd_mon_yyyy( date, '-' ) %]
+[% dt_dd_mon_yyyy( date.add(days=1) ) %]
+
+[%- MACRO dt_dd_mm_yyyy(dt,sep) 
+BLOCK;
+IF ! sep;
+SET sep='/';
+END;
+dt.day;
+sep;
+dt.month;
+sep;
+dt.year;
+END -%]
+
+[% dt_dd_mm_yyyy( date ) %]
+[% dt_dd_mm_yyyy( date, '-' ) %]
+[% dt_dd_mm_yyyy( date.add(days=1) ) %]
+
+[%- USE new_year = DateTime( day = 1, month = 1, year = date.year + 1) -%]
+
+Lets all have a party on [% dt_dd_mon_yyyy(new_year) %].
+
+[%# Macros can be nested, but the documentation is unclear about whether a macro can return, or otherwise set, a variable
+in the calling macro. I couldn't make it work. %]
+

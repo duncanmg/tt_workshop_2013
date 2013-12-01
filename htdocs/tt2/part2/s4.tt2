@@ -1,0 +1,11 @@
+<! [% component.name %] -->
+
+[%# Using a vmethod to add row number %]
+
+<table>
+<tr><th>No</th><th>Something</th><th>Something Else</th></tr>
+[% FOREACH r IN rows %]
+<tr><td>([% loop.index %])</td><td>[% r.something FILTER html_entity %]</td><td>[% r.something_else FILTER html_entity FILTER upper %]</td></tr>
+[% END %]
+</table>
+<!-- End [% component.name %] -->

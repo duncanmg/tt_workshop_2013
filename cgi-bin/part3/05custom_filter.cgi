@@ -1,0 +1,24 @@
+#! /usr/bin/perl
+
+# This relies on Math::Units being available.
+
+use strict;
+use warnings;
+use CGI;
+use Template;
+use Math::Units qw/ convert /;
+
+print convert( 17, "m", "ft" ) . "\n";
+
+my $tt = Template->new(
+    {
+        INCLUDE_PATH => '../../htdocs/tt2/part3',
+        FILTERS => { units => [ sub { my ( $context, $in, $out) = @_;
+return sub { my $num = shift; return convert( $num, $in, $out ); } } 
+    ,1]}}
+) || die "$Template::ERROR\n";
+
+$tt->process(
+    'dynamic_filters.tt2',
+) || die $tt->error() . "\n";
+

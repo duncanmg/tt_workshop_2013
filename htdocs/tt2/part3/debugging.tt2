@@ -1,0 +1,42 @@
+[% DEBUG off %]
+[%- i = 10 %]
+[% WHILE i > -10 -%]
+[% TRY -%]
+[% x = 10 / i -%]
+[% i | format('%02d') %]) [% x | format ('%0.4f') %]
+
+[%- IF i == 2;
+  THROW hate_this_number "I hate the number 2";
+END -%]
+[% CATCH -%]
+There is a problem with 10 / [% i %]:
+[% FILTER collapse %][% error.type %]: [% error.info %][% END %]
+[% END -%]
+[% i = i - 1; -%]
+[% END %]
+
+[% DEBUG on %]
+
+[%- i = 10 %]
+[% WHILE i > -10 -%]
+[% TRY -%]
+[% x = 10 / i -%]
+[% i | format('%02d') %]) [% x | format ('%0.4f') %]
+
+[%- IF i == 2;
+  THROW hate_this_number "I hate the number 2";
+END -%]
+[% CATCH -%]
+There is a problem with 10 / [% i %]:
+[% FILTER collapse %][% error.type %]: [% error.info %][% END %]
+[% END -%]
+[% i = i - 1; -%]
+[% END %]
+
+[% DEBUG off %]
+
+[% BLOCK test %]
+This should go to the standard error.
+[% END %]
+
+[% PROCESS test | stderr(binmode=1) %]

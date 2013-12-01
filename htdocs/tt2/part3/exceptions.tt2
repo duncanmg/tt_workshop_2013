@@ -1,0 +1,20 @@
+[%# This demonstrates the use of TRY and CATCH to catch an exception.
+The loop throws a built-in exception when it tries to divide by zero.
+It also throws a custom exception when the number is equal to two.
+The custom exception has a type as well as an erro message.  %]
+
+[%- i = 10 %]
+[% WHILE i > -10 -%]
+[% TRY -%]
+[% x = 10 / i -%]
+[% i | format('%02d') %]) [% x | format ('%0.4f') %]
+
+[%- IF i == 2;
+  THROW hate_this_number "I hate the number 2";
+END -%]
+[% CATCH -%]
+There is a problem with 10 / [% i %]:
+[% FILTER collapse %][% error.type %]: [% error.info %][% END %]
+[% END -%]
+[% i = i - 1; -%]
+[% END %]

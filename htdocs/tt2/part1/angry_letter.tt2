@@ -1,0 +1,7 @@
+[%# Angry letter -%]
+It has come to our attention that your account is in 
+arrears to the sum of [% d.debt %].
+   
+Please settle your account before [% d.deadline %] or we 
+will be forced to revoke your Licence to Thrill.
+

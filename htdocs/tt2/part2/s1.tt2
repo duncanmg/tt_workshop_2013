@@ -1,0 +1,20 @@
+Content-Type: text/html; charset=ISO-8859-1
+
+<html>
+<head>
+</head>
+<body>
+<h1>Introduction to TT</h2>
+
+[%# Header and footer will be the same on all pages %]
+
+<table>
+<tr><th>Something</th><th>Something Else</th></tr>
+[% FOREACH r IN rows %]
+<tr><td>[% r.something %]</td><td>[% r.something_else %]</td></tr>
+[% END %]
+</table>
+
+</body>
+</html>
+

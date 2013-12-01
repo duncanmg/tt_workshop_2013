@@ -1,0 +1,13 @@
+[%# Include other templates -%]
+[% FOREACH d IN debtors %]
+Dear [% d.name %],
+    
+[% IF d.angry -%]
+[% INCLUDE angry_letter.tt2 %]
+[% ELSE -%]
+[% INCLUDE grateful_letter.tt2 %]
+[% END -%]
+    
+The Management.
+[% END %]
+

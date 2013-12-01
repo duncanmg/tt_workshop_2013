@@ -1,0 +1,69 @@
+<!-- [% component.name %] [% month_num %] : [% year_num %] -->
+[% USE this_month = DateTime( day = 1, month = month_num, year = year_num ) %]
+[% USE today = DateTime( today = 1 ) %]
+[% SET last_day = this_month.clone %]
+[% SET last_day = last_day.add( months = 1 ); %]
+[% SET last_day = last_day.add( days = -1 ) %]
+[% SET current = undef %]
+
+[% BLOCK blank %]
+<td class="blank">&nbsp;</td>
+[% END -%]
+
+[% BLOCK day %]
+
+[% IF ! current %]
+[% SET current = this_month.clone %]
+[% ELSE %]
+[% SET current = current.clone.add( days = 1 ) %]
+[% END %]
+
+[% USE day_class = String(current.day_abbr) %]
+[% SET classes = [ day_class.lower ] %]
+[% classes.push( current.day_of_week < 6 ? "weekday" : "weekend" )%]
+
+[% IF current.compare( today ) == 0; classes.push("today"); END; %]
+
+[% FOREACH bh = bank_holidays;
+IF current.compare( bh ) == 0;
+classes.push("bank_holiday");
+END;
+END; %]
+
+<td class="[% GET classes.join( " " ) %]">
+[% current.day %]
+</td>
+[% END %]
+
+[% SET slot = 1 %]
+[% SET dom = 1 %]
+[% SET max_slots = 6 * 7 %]
+[% SET max = this_month.day_of_week + last_day.day %]
+
+<h2>[% this_month.month_name %]</h2>
+
+<table>
+<tr>
+[% FOREACH d = [ 'M', 'T', 'W', 'T', 'F', 'Sa', 'Su' ] %]
+<th>[% d%]</th>
+[% END -%]
+</tr>
+
+[% FOR col = [ 1 .. 6 ] %]
+<tr>
+
+[% FOR row = [ 1 .. 7 ] %]
+[% IF slot < this_month.day_of_week %]
+[% PROCESS blank %]
+[% ELSIF slot >= max %]
+[% PROCESS blank %]
+[% ELSE %]
+[% PROCESS day %]
+[% END %]
+[% slot = slot + 1 %]
+[% END %]
+
+</tr>
+[% END %]
+</table>
+<!-- End [% component.name %] -->
